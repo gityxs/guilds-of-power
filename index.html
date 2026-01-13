@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guilds of Power</title>
+  <script type="module" crossorigin src="./assets/index-BnKdxS9H.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-B1M5Bant.css">
+</head>
+<body>
+<script src="chs.js"></script>
+<script src="core.js"></script>
+    <!-- Title Screen -->
+    <div id="title-screen">
+        <div class="title-background"></div>
+        <div class="title-content">
+            <div class="title-logo">
+                <div class="title-emblem">⚔️</div>
+                <h1 class="title-main">Guilds of Power</h1>
+                <div class="title-divider"></div>
+                <p class="title-tagline">Forge Your Legacy in a World of Intrigue</p>
+            </div>
+            <div class="title-menu">
+                <button id="title-new-game" class="title-btn title-btn-primary">
+                    <span class="btn-icon">🗡️</span>
+                    <span class="btn-text">New Game</span>
+                </button>
+                <button id="title-continue" class="title-btn title-btn-secondary hidden">
+                    <span class="btn-icon">📜</span>
+                    <span class="btn-text">Continue</span>
+                </button>
+                <button id="title-lexicon" class="title-btn title-btn-tertiary">
+                    <span class="btn-icon">📚</span>
+                    <span class="btn-text">Lexicon</span>
+                </button>
+                <button id="title-settings" class="title-btn title-btn-tertiary">
+                    <span class="btn-icon">⚙️</span>
+                    <span class="btn-text">Settings</span>
+                </button>
+            </div>
+            <div class="title-footer">
+                <p class="title-version">Version 0.1.0</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lexicon Screen -->
+    <div id="lexicon-screen" class="hidden">
+        <div class="menu-header">
+            <button id="lexicon-back-to-title" class="back-btn">← Back</button>
+            <h1 class="game-title">📚 Lexicon</h1>
+            <p class="game-subtitle" id="lexicon-progress-text">Discovered Knowledge</p>
+        </div>
+        <div id="lexicon-screen-content" class="lexicon-screen-content">
+            <!-- Dynamic content -->
+        </div>
+    </div>
+
+    <!-- Main Menu (Character Creation) -->
+    <div id="main-menu" class="hidden">
+        <div class="menu-header">
+            <button id="back-to-title" class="back-btn">← Back</button>
+            <h1 class="game-title">Guilds of Power</h1>
+            <p class="game-subtitle">Create Your Character</p>
+        </div>
+
+        <div class="menu-layout">
+            <!-- Map Preview -->
+            <div class="menu-panel map-panel">
+                <div class="panel-header">World Preview</div>
+                <div class="map-preview-container">
+                    <canvas id="map-preview"></canvas>
+                </div>
+                <div class="map-controls">
+                    <div class="seed-display">
+                        <span class="seed-label">Seed:</span>
+                        <input type="text" id="world-seed-input" class="seed-input" placeholder="Enter seed..." maxlength="20">
+                        <button id="apply-seed-btn" class="seed-btn" title="Apply Seed">✓</button>
+                    </div>
+                    <button id="reroll-world-btn" class="reroll-btn">Reroll World</button>
+                </div>
+            </div>
+
+            <!-- Character Creation -->
+            <div class="menu-panel char-panel">
+                <div class="panel-header">Character Creation</div>
+
+                <div class="char-columns">
+                    <div class="char-column">
+                        <div class="menu-section">
+                            <label class="menu-label">Name</label>
+                            <input type="text" id="char-name" class="menu-input" placeholder="Enter name..." maxlength="20">
+                        </div>
+
+                        <div class="menu-section">
+                            <label class="menu-label">Race</label>
+                            <div class="race-grid" id="race-selection">
+                                <button class="race-btn selected" data-race="human">
+                                    <span class="race-icon">👤</span>
+                                    <span class="race-name">Human</span>
+                                </button>
+                                <button class="race-btn" data-race="half_elf">
+                                    <span class="race-icon">🧝</span>
+                                    <span class="race-name">Half Elf</span>
+                                </button>
+                                <button class="race-btn" data-race="elf">
+                                    <span class="race-icon">🧝‍♀️</span>
+                                    <span class="race-name">Elf</span>
+                                </button>
+                                <button class="race-btn" data-race="orc">
+                                    <span class="race-icon">👹</span>
+                                    <span class="race-name">Orc</span>
+                                </button>
+                                <button class="race-btn" data-race="goblin">
+                                    <span class="race-icon">👺</span>
+                                    <span class="race-name">Goblin</span>
+                                </button>
+                                <button class="race-btn" data-race="dwarf">
+                                    <span class="race-icon">🧔</span>
+                                    <span class="race-name">Dwarf</span>
+                                </button>
+                                <button class="race-btn" data-race="dragon_tongue">
+                                    <span class="race-icon">🐲</span>
+                                    <span class="race-name">Dragon-tongue</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="menu-section">
+                            <label class="menu-label">Class</label>
+                            <div class="class-grid" id="class-selection">
+                                <button class="class-btn selected" data-class="warrior">
+                                    <span class="class-icon">🗡️</span>
+                                    <span class="class-name">Warrior</span>
+                                </button>
+                                <button class="class-btn" data-class="rogue">
+                                    <span class="class-icon">🗝️</span>
+                                    <span class="class-name">Rogue</span>
+                                </button>
+                                <button class="class-btn" data-class="ranger">
+                                    <span class="class-icon">🏹</span>
+                                    <span class="class-name">Ranger</span>
+                                </button>
+                                <button class="class-btn" data-class="mage">
+                                    <span class="class-icon">🔮</span>
+                                    <span class="class-name">Mage</span>
+                                </button>
+                                <button class="class-btn" data-class="cleric">
+                                    <span class="class-icon">✝️</span>
+                                    <span class="class-name">Cleric</span>
+                                </button>
+                                <button class="class-btn" data-class="paladin">
+                                    <span class="class-icon">🛡️</span>
+                                    <span class="class-name">Paladin</span>
+                                </button>
+                                <button class="class-btn" data-class="druid">
+                                    <span class="class-icon">🌿</span>
+                                    <span class="class-name">Druid</span>
+                                </button>
+                                <button class="class-btn" data-class="mercenary">
+                                    <span class="class-icon">⚔️</span>
+                                    <span class="class-name">Mercenary</span>
+                                </button>
+                                <button class="class-btn" data-class="scout">
+                                    <span class="class-icon">🗺️</span>
+                                    <span class="class-name">Scout</span>
+                                </button>
+                                <button class="class-btn" data-class="merchant">
+                                    <span class="class-icon">💰</span>
+                                    <span class="class-name">Merchant</span>
+                                </button>
+                                <button class="class-btn" data-class="artisan">
+                                    <span class="class-icon">🔨</span>
+                                    <span class="class-name">Artisan</span>
+                                </button>
+                                <button class="class-btn" data-class="scholar">
+                                    <span class="class-icon">📚</span>
+                                    <span class="class-name">Scholar</span>
+                                </button>
+                                <button class="class-btn" data-class="mechanist">
+                                    <span class="class-icon">⚙️</span>
+                                    <span class="class-name">Mechanist</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="char-column">
+                        <div class="menu-section">
+                            <label class="menu-label">Stats</label>
+                            <div class="stats-preview" id="stats-preview">
+                                <div class="stat-preview-row" title="Gain followers, guild & party members">
+                                    <span>Trust</span><span id="preview-trust">7</span>
+                                </div>
+                                <div class="stat-preview-row" title="Higher yields, favorable outcomes">
+                                    <span>Prestige</span><span id="preview-prestige">5</span>
+                                </div>
+                                <div class="stat-preview-row" title="Relations with guilds, leaders, locations">
+                                    <span>Influence</span><span id="preview-influence">6</span>
+                                </div>
+                                <div class="stat-preview-row" title="Travel and crafting capacity">
+                                    <span>Stamina</span><span id="preview-stamina">5</span>
+                                </div>
+                                <div class="stat-preview-row" title="Your life points">
+                                    <span>HP</span><span id="preview-hp">6</span>
+                                </div>
+                                <div class="stat-preview-row" title="Magic and ether skills">
+                                    <span>Ether</span><span id="preview-ether">5</span>
+                                </div>
+                                <div class="stat-preview-row" title="Movement speed and evasion">
+                                    <span>Agility</span><span id="preview-agility">5</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="menu-section">
+                            <label class="menu-label">Starting Guild</label>
+                            <select id="guild-selection" class="menu-select">
+                                <option value="none">No Guild (Independent)</option>
+                                <option value="merchants">Merchant's Coalition</option>
+                                <option value="explorers">Explorer's League</option>
+                                <option value="artisans">Artisan's Circle</option>
+                                <option value="mercenaries">Iron Company</option>
+                            </select>
+                        </div>
+
+                        <div class="menu-section debug-section">
+                            <label class="debug-checkbox-label">
+                                <input type="checkbox" id="debug-midgame-checkbox" class="debug-checkbox">
+                                <span class="debug-checkbox-text">Debug: Mid-Game State (Testing)</span>
+                            </label>
+                        </div>
+
+                        <div class="menu-section class-perks-section">
+                            <label class="menu-label">Class Perks</label>
+                            <div id="class-perks" class="class-perks">
+                                <div class="perk-item">
+                                    <span class="perk-icon">⚔️</span>
+                                    <span class="perk-text">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="menu-buttons">
+                            <button id="continue-game-btn" class="continue-btn hidden">Continue Journey</button>
+                            <button id="start-game-btn" class="start-btn">Begin Journey</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-container" class="hidden">
+        <canvas id="game-canvas"></canvas>
+        <canvas id="particle-canvas"></canvas>
+
+        <!-- Dungeon Minimap HUD -->
+        <div id="dungeon-minimap" class="dungeon-minimap hidden">
+            <div class="minimap-header">Floor <span id="minimap-floor">1</span></div>
+            <canvas id="minimap-canvas" width="150" height="150"></canvas>
+        </div>
+
+        <!-- World Minimap HUD -->
+        <div id="world-minimap" class="world-minimap">
+            <div class="world-minimap-header">World Map</div>
+            <canvas id="world-minimap-canvas" width="180" height="180"></canvas>
+        </div>
+
+        <!-- Floating Lexicon Button (bottom right) -->
+        <button id="lexicon-float-btn" class="lexicon-float-btn" title="Lexicon - Game Knowledge">
+            📖
+            <span id="lexicon-badge" class="lexicon-badge hidden">0</span>
+        </button>
+
+        <!-- Left UI - Management Panels -->
+        <div id="game-ui-left">
+            <div id="inventory-panel" class="ui-panel collapsible">
+                <div class="panel-header" data-toggle="inventory-items">
+                    Inventory
+                    <span id="inventory-weight" class="inventory-weight">0/30</span>
+                </div>
+                <div id="inventory-items" class="inventory-items panel-body">
+                    <div class="inventory-empty">Empty</div>
+                </div>
+            </div>
+
+            <div id="actions-panel" class="ui-panel">
+                <div class="panel-header">Actions</div>
+                <div id="wilderness-actions" class="actions-panel-content"></div>
+            </div>
+
+            <div id="log-panel" class="ui-panel">
+                <div class="panel-header">Log</div>
+                <div id="log-entries"></div>
+            </div>
+        </div>
+
+        <!-- Right UI - Core Gameplay -->
+        <div id="game-ui-right">
+            <div id="time-panel" class="ui-panel">
+                <div class="panel-header">Time</div>
+                <div class="panel-content">
+                    <div id="time-display">Day 1, 06:00</div>
+                    <div id="time-period">Morning</div>
+                </div>
+            </div>
+
+            <div id="player-panel" class="ui-panel">
+                <div class="panel-header">Citizen</div>
+                <div class="player-name-row">
+                    <div id="player-name">Unnamed</div>
+                    <div id="player-level" class="player-level">Lv.1</div>
+                </div>
+                <div id="player-race">Human</div>
+                <div id="player-location">Location: ---</div>
+                <div id="player-status">Idle</div>
+                <div id="conditions-display" class="conditions-display"></div>
+                <div class="stat-bars">
+                    <div class="stat-row">
+                        <span class="stat-label">Health</span>
+                        <div class="stat-bar">
+                            <div id="health-bar" class="stat-fill health"></div>
+                        </div>
+                        <span id="health-text" class="stat-value">100/100</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Stamina</span>
+                        <div class="stat-bar">
+                            <div id="stamina-bar" class="stat-fill stamina"></div>
+                        </div>
+                        <span id="stamina-text" class="stat-value">100/100</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Ether</span>
+                        <div class="stat-bar">
+                            <div id="ether-bar" class="stat-fill ether"></div>
+                        </div>
+                        <span id="ether-text" class="stat-value">50/50</span>
+                    </div>
+                    <div class="stat-row xp-row">
+                        <span class="stat-label">EXP</span>
+                        <div class="stat-bar">
+                            <div id="xp-bar" class="stat-fill xp"></div>
+                        </div>
+                        <span id="xp-text" class="stat-value">0/100</span>
+                    </div>
+                </div>
+                <div class="attribute-grid" id="attribute-grid">
+                    <div class="attr-item" data-tooltip="Gain followers, guild & party members. Earned through volunteering.">
+                        <span class="attr-icon">🤝</span>
+                        <span class="attr-label">Trust</span>
+                        <span id="attr-trust" class="attr-value">5</span>
+                    </div>
+                    <div class="attr-item" data-tooltip="Higher yields and favorable outcomes. Earned through quests.">
+                        <span class="attr-icon">⭐</span>
+                        <span class="attr-label">Prestige</span>
+                        <span id="attr-prestige" class="attr-value">5</span>
+                    </div>
+                    <div class="attr-item" data-tooltip="Relations with guilds, leaders, and locations. Earned through quests.">
+                        <span class="attr-icon">👑</span>
+                        <span class="attr-label">Influence</span>
+                        <span id="attr-influence" class="attr-value">5</span>
+                    </div>
+                    <div class="attr-item" data-tooltip="Movement speed (+5% per point) and evasion in combat.">
+                        <span class="attr-icon">💨</span>
+                        <span class="attr-label">Agility</span>
+                        <span id="attr-agility" class="attr-value">5</span>
+                    </div>
+                </div>
+                <div class="alignment-display" id="alignment-display" data-tooltip="Your moral alignment affects which guilds and cults you can join">
+                    <span class="alignment-label">Alignment:</span>
+                    <span id="alignment-tier" class="alignment-tier">Neutral</span>
+                    <div class="alignment-bar">
+                        <div class="alignment-gradient"></div>
+                        <div id="alignment-marker" class="alignment-marker"></div>
+                    </div>
+                </div>
+                <div id="player-gold">Gold: 50</div>
+            </div>
+
+            <div id="actions-panel" class="ui-panel">
+                <div class="panel-header">Actions</div>
+                <div class="panel-content">
+                    <!-- Progress Bar (hidden when not active) -->
+                    <div id="action-progress" class="action-progress hidden">
+                        <div class="progress-label">
+                            <span id="progress-action-name">Working...</span>
+                            <span id="progress-percent">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div id="progress-fill" class="progress-fill"></div>
+                        </div>
+                        <button id="cancel-action-btn" class="cancel-btn">Cancel</button>
+                    </div>
+
+                    <!-- Basic Actions -->
+                    <div id="basic-actions" class="action-row">
+                        <button id="rest-btn" class="action-btn">Rest (1hr)</button>
+                        <button id="tent-btn" class="action-btn hidden" title="Set up camp and rest (8hrs)">⛺ Camp</button>
+                        <button id="wait-btn" class="action-btn">⏸ Stop</button>
+                    </div>
+
+                    <!-- Town Actions Grid -->
+                    <div id="town-actions" class="town-actions hidden">
+                        <div class="action-category">
+                            <span class="category-label">Activities</span>
+                            <div class="action-grid" id="activity-actions"></div>
+                        </div>
+                        <div class="action-category">
+                            <span class="category-label">Services</span>
+                            <div class="action-grid" id="service-actions"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Task Queue (bottom bar) -->
+        <div id="task-queue" class="task-queue">
+            <div id="task-queue-items" class="task-queue-items">
+                <!-- Active task cards are dynamically added here -->
+            </div>
+        </div>
+
+    </div>
+
+    <div id="tooltip" class="tooltip hidden"></div>
+    <div id="item-tooltip" class="item-tooltip hidden"></div>
+
+    <!-- Save Indicator -->
+    <div id="save-indicator" class="save-indicator">Saved</div>
+
+    <!-- Hex Context Menu -->
+    <div id="hex-menu" class="hex-menu hidden">
+        <div class="hex-menu-header">
+            <span id="hex-menu-biome">Biome</span>
+            <button id="hex-menu-close" class="hex-menu-close">×</button>
+        </div>
+        <div id="hex-menu-actions" class="hex-menu-actions"></div>
+    </div>
+
+    <!-- Hex Progress Overlay (rendered on canvas, but controlled via JS) -->
+    <div id="hex-overlay" class="hex-overlay hidden">
+        <svg id="hex-progress-svg" viewBox="0 0 100 100">
+            <polygon id="hex-progress-bg" class="hex-progress-bg" points="50,3 97,28 97,72 50,97 3,72 3,28"/>
+            <polygon id="hex-progress-fill" class="hex-progress-fill" points="50,3 97,28 97,72 50,97 3,72 3,28"/>
+            <text id="hex-progress-icon" x="50" y="45" class="hex-progress-icon"></text>
+            <text id="hex-progress-text" x="50" y="70" class="hex-progress-text">0%</text>
+        </svg>
+    </div>
+
+    <!-- Compass / Quest Tracker -->
+    <div id="compass" class="compass hidden">
+        <div class="compass-ring">
+            <div id="compass-arrow" class="compass-arrow">➤</div>
+        </div>
+        <div class="compass-info">
+            <div id="compass-icon" class="compass-target-icon">📜</div>
+            <div id="compass-name" class="compass-target-name">No Target</div>
+            <div id="compass-distance" class="compass-distance">-- hexes</div>
+        </div>
+        <div class="compass-hint">Click to cycle</div>
+    </div>
+
+    <!-- Game Modal (for hiring, guilds, etc) -->
+    <div id="game-modal" class="game-modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="modal-title">Modal Title</span>
+                <button id="modal-close" class="modal-close">&times;</button>
+            </div>
+            <div id="modal-body" class="modal-body">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+    </div>
+<!--客服 开始-->
+<script src="//g8hh.github.io/static/js/jquery.min.js"></script>
+<link rel="stylesheet" href="//g8hh.github.io/static/css/kf.css" type="text/css" media="screen" charset="utf-8">
+<script src="//g8hh.github.io/static/js/kf.js"></script>
+<!-- 客服 结束 -->
+<!--站长统计-->
+    <div style="display: none">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?828597e93cee632465679b7ef35edfd5";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>    </div>
+</body>
+</html>
